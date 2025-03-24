@@ -60,7 +60,8 @@ try:
 except NoSuchElementException:
     print("Element with class 'fc-button-label' not found.")
 
-driver.find_element(By.CSS_SELECTOR, ".scanner-advanced.btn.btn-outline-secondary").click()
+button = driver.find_element(By.CSS_SELECTOR, ".scanner-advanced.btn.btn-outline-secondary")
+driver.execute_script("arguments[0].click();", button)
 
 # Enter the Bitcoin wallet address
 payout_address = driver.find_element(By.ID, "address")
@@ -104,7 +105,7 @@ count = 0
 # Monitoring loop
 while True:
     time.sleep(10)  # Wait before each update
-    if count == 1:
+    if count == 60:
         count = 0
     count += 1
     # Get real-time data
