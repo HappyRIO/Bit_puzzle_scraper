@@ -118,7 +118,6 @@ while True:
     # Save data to CSV
     print(f"Monitoring... {count}")
     if count == 1:
-        print(f"Mon... {count}")
         with open(csv_filename, "a", newline="") as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writerow({
@@ -149,15 +148,12 @@ while True:
         send_telegram_message(result_message, CHAT_ID)
         break  # Exit loop if a key is found
     
-    print("Polling for updates...")
     updates = get_telegram_updates(offset)
     if "result" in updates:
-        print("Updates received.")
         for update in updates["result"]:
             offset = update["update_id"] + 1  # Move the offset forward to avoid receiving the same message multiple times
             message_text = update["message"]["text"]
             user_id = update["message"]["from"]["id"]  # Get the user ID
-            print(f"Received message: {message_text} from user ID: {user_id}")
             if message_text == "/progress" and user_id == int(CHAT_ID):
                 formatted_number = format_number(latest_progress['Current Key'])
                 progress_message = (

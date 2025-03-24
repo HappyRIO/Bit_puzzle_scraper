@@ -27,3 +27,4 @@ build/
 docs/
 
 scan_results.csv
+found_keys.txt
